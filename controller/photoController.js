@@ -7,7 +7,6 @@ const uploads = utils.uploads;
 exports.addPhoto = async(req,res) => {
     //1. get photo details from body
     const photo = { name, description }= req.body
-    
     if (!photo.name||!photo.description) {
         res.status(400).json({
             status: 'failed',
@@ -38,4 +37,26 @@ exports.addPhoto = async(req,res) => {
     
     
 
+}
+exports.updatePhoto = async(req, res) => {
+    const id = req.params.id;
+    const update = req.body;
+    if (!update) {
+        res.status(400).json({
+            status: 'failed!',
+            message:'add update details'
+        })
+    }
+    try {
+        const updatedPhoto = await Photo.findByIdAndUpdate(id,{...update});
+        res.status(200).json({
+            status: 'Successful',
+            photo:updatedPhoto
+            // message:`Photo ${updatedPhoto._id} updated successfully!`
+        })
+    }
+    catch (error) {
+        console.error(error)
+    }
+    
 }
