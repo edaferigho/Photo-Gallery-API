@@ -12,9 +12,11 @@ const uploads = utils.uploads
 const checkId = photoware.checkInputId;
 
 Router.post('/', uploads.single('image'), photoController.addPhoto)
+Router.get('/search',photoController.searchByName)
 Router.put('/:id',checkId, photoController.updatePhoto)
 Router.delete('/:id',checkId, photoController.deletePhoto)
 Router.get('/', photoController.getPhotos)
-Router.get('/:id',checkId,photoController.getPhoto)
+Router.get('/:id', checkId, photoController.getPhoto)
+
 
 module.exports = Router;
