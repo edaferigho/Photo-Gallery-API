@@ -85,3 +85,46 @@ exports.deletePhoto = async(req, res) => {
         console.log(error)
     }
 }
+exports.getPhotos = async (req, res) => {
+    try {
+        const photos = await Photo.find({});
+        if (photos) {
+            res.status(200).json({
+                photos
+            })
+        }
+        else {
+            res.status(200).json({
+                message:'No photo found in gallery!'
+            })
+        }
+    }
+    catch (error) {
+        res.status(500).json({
+            message:'Currently unable to retrieve Photos, try again later!'
+        })
+    console.log(error)
+        
+    }
+}
+exports.getPhoto = async(req,res) => {
+    const id = req.params.id;
+    try {
+        const photo = await Photo.findById(id)
+        if (photo) {
+            res.status(200).json({
+                photo
+            })
+        }
+        else {
+            res.status(404).json({
+                message:'Photo not found'
+            })
+        }
+    }
+    catch (error) {
+        res.status(500).json({
+            message:'Unable to retrive Photo at this time, Please try later'
+        })
+    }
+}
