@@ -8,6 +8,4 @@ You can access the full documentation [here](https://documenter.postman.com/prev
  - `git clone the repository
  - npm install
  - use npm start to run server`
-=======
-# Photo Gallery API
-This project is a simple web server written in Javascript using Nodejs and Mongodb, with the purpose to store images for Client Applications like web applications or mobile apps.
+
