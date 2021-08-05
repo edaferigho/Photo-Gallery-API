@@ -11,6 +11,8 @@ const uploads = utils.uploads
 
 Router.post('/', uploads.single('image'), photoController.addPhoto)
 Router.put('/:id', photoController.updatePhoto)
-Router.delete('/:id',photoController.deletePhoto)
+Router.delete('/:id', photoController.deletePhoto)
+Router.get('/', photoController.getPhotos)
+Router.get('/:id',photoController.getPhoto)
 
 module.exports = Router;
