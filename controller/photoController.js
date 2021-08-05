@@ -1,6 +1,7 @@
 const Photo = require('../model/photoModel')
 const utils = require('../utility/utils')
 const path = require('path')
+const fsExtra = require('fs-extra')
 
 const uploads = utils.uploads;
 
@@ -59,4 +60,28 @@ exports.updatePhoto = async(req, res) => {
         console.error(error)
     }
     
+}
+exports.deletePhoto = async(req, res) => {
+    const id = req.params.id;
+    try {
+        const response = await Photo.findByIdAndRemove(id)
+        if (response) {
+            await fsExtra.unlink(path.resolve('uploads',response.image_url))
+            res.status(200).json({
+                status: 'Success!',
+                message:'Photo deleted successfully!'
+            })
+        }
+        else {
+            res.status(404).json({
+                status: 'Failed',
+                message:`Photo ${id} not found`
+            })
+        }
+    
+    }
+    catch (error) {
+        res.status(500).send('Operation failed! Please again later!')
+        console.log(error)
+    }
 }
