@@ -128,3 +128,21 @@ exports.getPhoto = async(req,res) => {
         })
     }
 }
+exports.searchByName = async(req, res)=> {
+    const query = req.query;
+    try {
+        const photos = await Photo.find(query)
+        if (photos) {
+            res.status(200).send(photos)
+        }
+        else {
+            res.status(404).json({
+                message: `Photos not avaliable for the current query!`
+            })
+        }
+    }
+    catch (error) {
+        res.status(500).send('Operation failed, Try again later')
+        console.log(error)
+    }
+}
