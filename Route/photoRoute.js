@@ -10,6 +10,7 @@ Router.use(express.static('uploads'))
 const uploads = utils.uploads
 
 Router.post('/', uploads.single('image'), photoController.addPhoto)
-Router.post('/:id',photoController.updatePhoto)
+Router.put('/:id', photoController.updatePhoto)
+Router.delete('/:id',photoController.deletePhoto)
 
 module.exports = Router;
